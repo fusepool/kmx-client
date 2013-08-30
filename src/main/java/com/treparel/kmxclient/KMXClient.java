@@ -43,14 +43,11 @@ public class KMXClient {
     private static final Logger log = LoggerFactory.getLogger(KMXClient.class);
 
     public KMXClient() throws IOException {
-        // TODO: fix use the create session rest endpoint on kmx
-        // this.sessionKey = "32478fb9ac51d46919bcbe02cd229c42a004e939";
-
         //String authString = "test:test";
         //byte[] authEncBytes = Base64.encodeBase64(authString.getBytes());
         this.authStringEnc = "dGVzdGVyOnRlc3Rlcg==";//new String(authEncBytes);
         this.sessionKey = createSession();
-        System.out.println("KMX session: " + this.sessionKey);
+        log.info("KMX session: " + this.sessionKey);
     }
 
     private String createSession() throws IOException {
@@ -84,8 +81,8 @@ public class KMXClient {
         String requestString = url;
         try {
             requestUrl = new URL(requestString.toString());
-            System.out.println(" > kmx request: " + method + " " + requestUrl);
-            System.out.println(" > kmx request: " + body);
+            log.info(" > kmx request: " + method + " " + requestUrl);
+            //System.out.println(" > kmx request: " + body);
         } catch (MalformedURLException e) {
             throw new RuntimeException("Unable to build valid request URL for " + requestString);
         }
