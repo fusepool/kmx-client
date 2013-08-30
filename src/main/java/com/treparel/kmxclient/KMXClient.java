@@ -114,12 +114,12 @@ public class KMXClient {
         if (body.length() > 0) {
             connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
             connection.setRequestProperty("Content-Length", ""
-                    + Integer.toString(body.getBytes().length));
+                    + Integer.toString(body.getBytes("UTF-8").length));
         }
         if ("POST".equals(method)) {
             DataOutputStream wr = new DataOutputStream(
             connection.getOutputStream());
-            wr.writeBytes(body);
+            wr.write(body.getBytes("UTF-8"), 0, body.getBytes("UTF-8").length);
             wr.flush();
             wr.close();
         }
