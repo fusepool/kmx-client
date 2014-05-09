@@ -332,6 +332,19 @@ public class KMXClient {
         return doPost(url, body);
     }
     
+    public JSONObject calcLandscapeCoords(List<List<String>> docs) throws IOException {
+        String url = this.baseURL + "projection/coords?session=" + this.sessionKey;
+        String body;
+        try {
+            JSONObject data = new JSONObject();
+            data.put("docs", docs);
+            body = data.toString();
+        } catch (JSONException ex) {
+            throw new IOException("Unable to serialize text", ex);
+        }
+        return doPost(url, body);
+    }
+    
     public String toString() {
         return "KMX Client " + this.sessionKey;
     }
