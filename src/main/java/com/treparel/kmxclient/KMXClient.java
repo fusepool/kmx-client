@@ -102,6 +102,8 @@ public class KMXClient {
 
 
         connection.setUseCaches(false);
+        connection.setConnectTimeout(CONNECTION_TIMEOUT);
+        connection.setReadTimeout(CONNECTION_TIMEOUT);
         connection.setDoInput(true);
         if ("POST".equals(method)) {
             connection.setDoOutput(true);
@@ -123,6 +125,7 @@ public class KMXClient {
 
         return connection;
     }
+    private static final int CONNECTION_TIMEOUT = 10*1000;
 
     private JSONObject doPost(String url, String data) throws RuntimeException, IOException {
         return handleResponse(doRequest(url, data, "POST"));
